@@ -1,39 +1,42 @@
 [Variables]
-;越大，颜色变化越快
-Speed = 5
+;越大，颜色变化越大
+ColorUpdateSpeed = 5
+;越小，颜色变化越快
+ColorUpdateRate = 5
+
 ;计算脚本路径
 CalcLuaPath = #@#\Inc\DynamicColor.lua
 
 [MyCount]
 Measure = Calc
 Formula = ColorValue
-UpdateDivider = 10
+UpdateDivider = #ColorUpdateRate#
 
 [ColorValue]
 Measure = Calc
-Formula = MyCount + #Speed#
-UpdateDivider = 10
+Formula = MyCount + #ColorUpdateSpeed#
+UpdateDivider = #ColorUpdateRate#
 
 [ColorHue]
 Measure = Calc
 Formula = ColorValue % 361 / 360
-UpdateDivider = 10
+UpdateDivider = #ColorUpdateRate#
 
 ;R
 [ColorR]
 Measure = Script
 ScriptFile = #CalcLuaPath#
-UpdateDivider = 10
+UpdateDivider = #ColorUpdateRate#
 
 ;G
 [ColorG]
 Measure = Script
 ScriptFile = #CalcLuaPath#
-UpdateDivider = 10
+UpdateDivider = #ColorUpdateRate#
 
 ;B
 [ColorB]
 Measure = Script
 ScriptFile = #CalcLuaPath#
-UpdateDivider = 10
+UpdateDivider = #ColorUpdateRate#
 

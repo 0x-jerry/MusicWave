@@ -1,5 +1,4 @@
 function Initialize()
-
 	local fileMeterBand = SKIN:MakePathAbsolute(SKIN:GetVariable('MeterBandPath'))
 	local BandNum = SKIN:ParseFormula(SKIN:GetVariable('BandNum'))
 	
@@ -35,7 +34,7 @@ function writeMeterBand( fileName,num )
 	file:close()
 
 	if oldNum == nil then oldNum = 0 end
-	--Test:强制更新 -- 发布时修改
+	--测试功能:强制更新，发布时删除
 	oldNum = 0
 	
 	if(num ~= oldNum) then
@@ -47,7 +46,8 @@ function writeMeterBand( fileName,num )
 		for i=0,num-1 do
 			local screenWidth = SKIN:ParseFormula(SKIN:GetVariable('ScreenAreaWidth'))
 			--计算偏移量
-			local totalBarWidth = num * 4
+			local XValue = string.gsub(X,"R",".0")
+			local totalBarWidth = num * (W + XValue)
 			local offsetX = (screenWidth - totalBarWidth) / 2
 			local offsetText = ""
 			if i == 0 then offsetText = offsetX .. "R" else offsetText = X end
