@@ -1,19 +1,20 @@
 [Variables]
-@include=#@#Inc/DynamicColor.inc
 ;路径
+InitAudioDataLuaPath = #@#Scripts\Init.lua
 MeasureBandPath = #@#MeasureBand.inc
 MeterBandPath = MeterBand.inc
+DynamicColorPath = #@#Inc\DynamicColor.inc
 
 ;音频的数量，由于是双声道，所以总数量会乘以2
-BandNum = 175
+BandNum = 170
 ;音频的方向，0向上，1向下
 BackwardDir = 1
 ;音频宽度
 Width = 2
 ;是否启动动态颜色，1启用
-DynamicColor = 1
+DynamicColor = 0
 ;启动动态颜色后会忽略此选项，固定颜色
-WaveColor = FFF900f0
+WaveColor = FF00FFee
 
 ;AudioLevel 参数设置
 [MeasureAudio]

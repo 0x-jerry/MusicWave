@@ -3,7 +3,7 @@ function Initialize(  )
 	local fileMeasureBand = SKIN:MakePathAbsolute(SKIN:GetVariable('MeasureBandPath'))
 	local fileMeterBand = SKIN:MakePathAbsolute(SKIN:GetVariable('MeterBandPath'))
 	local BandNum = SKIN:ParseFormula(SKIN:GetVariable('BandNum'))
-	
+	print("Load Lua: Init.Lua")
 	writeMeasureBand(fileMeasureBand,BandNum)
 end
 

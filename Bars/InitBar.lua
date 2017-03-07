@@ -6,7 +6,6 @@ function Initialize()
 	writeMeterBand(fileMeterBand,BandNum)
 end
 
-
 function writeMeterBand( fileName,num )
 	--获取参数
 	local flip = SKIN:ParseFormula(SKIN:GetVariable('BackwardDir'))
@@ -17,7 +16,12 @@ function writeMeterBand( fileName,num )
 	local W = SKIN:GetVariable('W')
 	local H = SKIN:GetVariable('H')
 	--判断动态颜色
-	if dynamicColor == 1 then waveColor = "[EndR],[EndG],[EndB],200" end
+	if dynamicColor == 1 then 
+		waveColor = "[ColorR],[ColorG],[ColorB],180"
+		SKIN:Bang('!WriteKeyValue Variables ColorIncPath #DynamicColorPath#')
+	else
+		SKIN:Bang('!WriteKeyValue Variables ColorIncPath " "')
+	end
 
 	local format = ''
 	local file = io.open(fileName,"r")
@@ -57,10 +61,11 @@ function writeMeterBand( fileName,num )
 			format = format .. "H="..H.."\n"
 			format = format .. "Flip="..flip.."\n"
 			format = format .. "BarColor="..waveColor.."\n"
-			format = format .. "DynamicVariables=1\n"
+			format = format .. "DynamicVariables="..dynamicColor.."\n"
 			file:write(format)
 		end
 		
 		file:close()
  	end
 end
+
