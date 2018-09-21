@@ -1,6 +1,12 @@
-# music wave 为 [RainMeter](http://rainmeter.cn/cms/) 插件
+# music wave 为 [RainMeter](https://docs.rainmeter.net/) 插件
 
-Todo: 添加开源软件的许可协议和文件相关说明
-Todo: 调整 Wave 的平滑程度
+## 截图
 
-Roundlines 文件夹中为测试文件
+![demo4](./images/demo4.png)
+![demo1](./images/demo1.png)
+![demo2](./images/demo2.png)
+![demo3](./images/demo3.png)
+
+## 配置文件
+
+配置文件 [`Setting.inc`](./Setting.inc)
