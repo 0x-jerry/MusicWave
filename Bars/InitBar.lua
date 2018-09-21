@@ -1,7 +1,8 @@
 function Initialize()
 	local fileMeterBand = SKIN:MakePathAbsolute(SKIN:GetVariable('MeterBandPath'))
   local BandNum = SKIN:ParseFormula(SKIN:GetVariable('BandNum'))
-	
+
+  print('load init bar')
 	writeMeterBand(fileMeterBand,BandNum)
 end
 
@@ -33,18 +34,13 @@ function writeMeterBand( fileName,num )
   file:write(format)
   
   for i=0,num-1 do
-    local screenWidth = SKIN:ParseFormula(SKIN:GetVariable('ScreenAreaWidth'))
     --计算偏移量
-    local XValue = string.gsub(X,"R",".0")
-    local totalBarWidth = num * (W + XValue)
-    local offsetX = (screenWidth - totalBarWidth) / 2
-    local offsetText = ""
-    if i == 0 then offsetText = offsetX .. "R" else offsetText = X end
+    local offsetX = i * (W + 2)
 
     format = "[MeterBand"..i.."]\n"
     format = format .. "Meter=Bar\n"
     format = format .. "MeasureName=MeasureBand"..i.."\n"
-    format = format .. "X="..offsetText.."\n"
+    format = format .. "X="..offsetX.."\n"
     format = format .. "Y="..Y.."\n"
     format = format .. "W="..W.."\n"
     format = format .. "H="..H.."\n"
