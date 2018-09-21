@@ -1,6 +1,6 @@
 function Initialize()
 	local fileMeterBand = SKIN:MakePathAbsolute(SKIN:GetVariable('MeterBandPath'))
-	local BandNum = SKIN:ParseFormula(SKIN:GetVariable('BandNum'))
+  local BandNum = SKIN:ParseFormula(SKIN:GetVariable('BandNum'))
 	
 	writeMeterBand(fileMeterBand,BandNum)
 end
@@ -24,48 +24,36 @@ function writeMeterBand( fileName,num )
 
 	local format = ''
 	local file = io.open(fileName,"r")
-	local oldNum = nil
 	--数量加倍
 	num = num * 2
 	
-	if file:read(1) == ';' then
-		oldNum = file:read("*n")
-	end
-	file:close()
+  file = io.open(fileName,"w+")
 
-	if oldNum == nil then oldNum = 0 end
-	--测试功能:强制更新，发布时删除
-	oldNum = 0
-	
-	if(num ~= oldNum) then
-		file = io.open(fileName,"w+")
+  format = ";"..num.."\n"
+  file:write(format)
+  
+  for i=0,num-1 do
+    local screenWidth = SKIN:ParseFormula(SKIN:GetVariable('ScreenAreaWidth'))
+    --计算偏移量
+    local XValue = string.gsub(X,"R",".0")
+    local totalBarWidth = num * (W + XValue)
+    local offsetX = (screenWidth - totalBarWidth) / 2
+    local offsetText = ""
+    if i == 0 then offsetText = offsetX .. "R" else offsetText = X end
 
-		format = ";"..num.."\n"
-		file:write(format)
-		
-		for i=0,num-1 do
-			local screenWidth = SKIN:ParseFormula(SKIN:GetVariable('ScreenAreaWidth'))
-			--计算偏移量
-			local XValue = string.gsub(X,"R",".0")
-			local totalBarWidth = num * (W + XValue)
-			local offsetX = (screenWidth - totalBarWidth) / 2
-			local offsetText = ""
-			if i == 0 then offsetText = offsetX .. "R" else offsetText = X end
+    format = "[MeterBand"..i.."]\n"
+    format = format .. "Meter=Bar\n"
+    format = format .. "MeasureName=MeasureBand"..i.."\n"
+    format = format .. "X="..offsetText.."\n"
+    format = format .. "Y="..Y.."\n"
+    format = format .. "W="..W.."\n"
+    format = format .. "H="..H.."\n"
+    format = format .. "Flip="..flip.."\n"
+    format = format .. "BarColor="..waveColor.."\n"
+    format = format .. "DynamicVariables="..dynamicColor.."\n"
+    file:write(format)
+  end
 
-			format = "[MeterBand"..i.."]\n"
-			format = format .. "Meter=Bar\n"
-			format = format .. "MeasureName=MeasureBand"..i.."\n"
-			format = format .. "X="..offsetText.."\n"
-			format = format .. "Y="..Y.."\n"
-			format = format .. "W="..W.."\n"
-			format = format .. "H="..H.."\n"
-			format = format .. "Flip="..flip.."\n"
-			format = format .. "BarColor="..waveColor.."\n"
-			format = format .. "DynamicVariables="..dynamicColor.."\n"
-			file:write(format)
-		end
-		
-		file:close()
- 	end
+  file:close()
 end
 

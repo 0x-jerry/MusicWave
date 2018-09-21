@@ -2,7 +2,7 @@
 ;越大，颜色变化越大
 ColorUpdateSpeed = 5
 ;越小，颜色变化越快
-ColorUpdateRate = 5
+ColorUpdateRate = 10
 
 ;计算脚本路径
 CalcLuaPath = #@#\Inc\DynamicColor.lua

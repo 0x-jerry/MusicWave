@@ -7,11 +7,11 @@ DynamicColorPath = #@#Inc\DynamicColor.inc
 
 ;音频的数量，由于是双声道，所以总数量会乘以2
 ;有效范围为 (0 ~ FFTSize / 2 / 2)
-BandNum = 200
+BandNum = 100
 ;音频的方向，0向上，1向下
 BackwardDir = 1
 ;音频宽度
-Width = 1
+Width = 3
 ;是否启动动态颜色，1启用
 DynamicColor = 1
 ;启动动态颜色后会忽略此选项，固定颜色
