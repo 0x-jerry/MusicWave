@@ -11,6 +11,7 @@ function writeMeterBand( fileName,num )
 	local flip = SKIN:ParseFormula(SKIN:GetVariable('BackwardDir'))
 	local dynamicColor = SKIN:ParseFormula(SKIN:GetVariable('DynamicColor'))
 	local waveColor = SKIN:GetVariable('WaveColor')
+	local orientation = SKIN:GetVariable('Orientation')
 	local X = SKIN:GetVariable('X')
 	local Y = SKIN:GetVariable('Y')
 	local W = SKIN:GetVariable('W')
@@ -24,7 +25,6 @@ function writeMeterBand( fileName,num )
 	end
 
 	local format = ''
-	local file = io.open(fileName,"r")
 	--数量加倍
 	num = num * 2
 	
@@ -35,19 +35,27 @@ function writeMeterBand( fileName,num )
   
   for i=0,num-1 do
     --计算偏移量
-    local offsetX = i * (W + 2)
+    local offset = i * (W + 2)
 
     format = "[MeterBand"..i.."]\n"
     format = format .. "Meter=Bar\n"
     format = format .. "MeasureName=MeasureBand"..i.."\n"
-    format = format .. "X="..offsetX.."\n"
-    format = format .. "Y="..Y.."\n"
-    format = format .. "W="..W.."\n"
-    format = format .. "H="..H.."\n"
     format = format .. "Flip="..flip.."\n"
     format = format .. "BarColor="..waveColor.."\n"
     format = format .. "DynamicVariables="..dynamicColor.."\n"
-    file:write(format)
+    format = format .. "BarOrientation="..orientation.."\n"
+    if orientation == 'Vertical' then
+      format = format .. "X="..offset.."\n"
+      format = format .. "Y="..Y.."\n"
+      format = format .. "W="..W.."\n"
+      format = format .. "H="..H.."\n"
+    else
+      format = format .. "X="..X.."\n"
+      format = format .. "Y="..offset.."\n"
+      format = format .. "W="..H.."\n"
+      format = format .. "H="..W.."\n"
+    end
+      file:write(format)
   end
 
   file:close()
