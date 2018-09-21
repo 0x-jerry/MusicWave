@@ -13,7 +13,7 @@ BackwardDir = 1
 ;音频宽度
 Width = 1
 ;是否启动动态颜色，1启用
-DynamicColor = 0
+DynamicColor = 1
 ;启动动态颜色后会忽略此选项，固定颜色
 WaveColor = FF00FF
 
